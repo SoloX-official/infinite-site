@@ -15,27 +15,39 @@
     padding: 20px;
     box-sizing: border-box;
   }
+  #scrollInfo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 5px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+  }
   .item {
     border: 1px solid #fff;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     padding: 10px;
   }
 </style>
 </head>
 <body>
+<div id="scrollInfo">Lines Scrolled: 0</div>
 <div id="container"></div>
 
 <script>
 let container = document.getElementById('container');
+let scrollInfo = document.getElementById('scrollInfo');
 let page = 1;
-let lineNumber = 0; // Initialize line number counter
+let lineNumber = 1;
+let linesScrolled = 0;
 
 function fetchData() {
   // Simulating fetching data by generating line numbers
   let data = [];
   for (let i = 0; i < 10; i++) {
     data.push({
-      title: 'line',
       lineNumber: lineNumber++
     });
   }
@@ -43,7 +55,7 @@ function fetchData() {
     let newItem = document.createElement('div');
     newItem.className = 'item';
     newItem.innerHTML = `
-      <p>${item.title} ${item.lineNumber}</p>
+      <p>line ${item.lineNumber}</p>
     `;
     container.appendChild(newItem);
   });
@@ -58,6 +70,10 @@ window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
     fetchData();
   }
+  
+  // Update lines scrolled
+  linesScrolled = Math.round(window.scrollY / 74.5); // Assuming each line has a height of 20px
+  scrollInfo.textContent = `Lines Scrolled: ${linesScrolled}`;
 });
 </script>
 </body>
