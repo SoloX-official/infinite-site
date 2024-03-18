@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Website</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  #container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .item {
+    border: 1px solid #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+<div id="container"></div>
+
+<script>
+let container = document.getElementById('container');
+let page = 1;
+let lineNumber = 0; // Initialize line number counter
+
+function fetchData() {
+  // Simulating fetching data by generating line numbers
+  let data = [];
+  for (let i = 0; i < 10; i++) {
+    data.push({
+      title: 'line',
+      lineNumber: lineNumber++
+    });
+  }
+  data.forEach(item => {
+    let newItem = document.createElement('div');
+    newItem.className = 'item';
+    newItem.innerHTML = `
+      <p>${item.title} ${item.lineNumber}</p>
+    `;
+    container.appendChild(newItem);
+  });
+  page++;
+}
+
+// Initial data load
+fetchData();
+
+// Load more data when scrolling
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+    fetchData();
+  }
+});
+</script>
+</body>
+</html>
