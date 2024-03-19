@@ -42,7 +42,7 @@ let scrollInfo = document.getElementById('scrollInfo');
 let page = 1;
 let lineNumber = 1;
 let linesScrolled = 0;
-let highestLinesScrolled = 0;
+let highestLinesScrolled = localStorage.getItem('highestLinesScrolled') || 0;
 
 function fetchData() {
   // Simulating fetching data by generating line numbers
@@ -79,6 +79,7 @@ window.addEventListener('scroll', () => {
   // Update highest lines scrolled
   if (linesScrolled > highestLinesScrolled) {
     highestLinesScrolled = linesScrolled;
+    localStorage.setItem('highestLinesScrolled', highestLinesScrolled);
   }
 });
 </script>
