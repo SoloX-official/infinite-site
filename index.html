@@ -21,13 +21,13 @@
     left: 0;
     width: 100%;
     background-color: #f0f0f0;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
   }
   .item {
     border: 1px solid #fff;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     padding: 10px;
   }
 </style>
@@ -42,7 +42,7 @@ let scrollInfo = document.getElementById('scrollInfo');
 let page = 1;
 let lineNumber = 1;
 let linesScrolled = 0;
-let highestLinesScrolled = localStorage.getItem('highestLinesScrolled') || 0;
+let highestLinesScrolled = 0;
 
 function fetchData() {
   // Simulating fetching data by generating line numbers
@@ -73,13 +73,12 @@ window.addEventListener('scroll', () => {
   }
   
   // Update lines scrolled
-  linesScrolled = Math.round(window.scrollY / 74.5); // Assuming each line has a height of 20px
+  linesScrolled = Math.round(window.scrollY / 20); // Assuming each line has a height of 20px
   scrollInfo.textContent = `Lines Scrolled: ${linesScrolled} | Highest Lines Scrolled: ${highestLinesScrolled}`;
   
   // Update highest lines scrolled
   if (linesScrolled > highestLinesScrolled) {
     highestLinesScrolled = linesScrolled;
-    localStorage.setItem('highestLinesScrolled', highestLinesScrolled);
   }
 });
 </script>
